@@ -1,0 +1,26 @@
+CREATE DATABASE IF NOT EXISTS artistas;
+
+USE artistas;
+
+CREATE TABLE IF NOT EXISTS artistas (
+  IDArtista INTEGER PRIMARY KEY AUTO_INCREMENT,
+  nomeArtista VARCHAR(100) NOT NULL,
+  nacionalidade VARCHAR(100) NOT NULL,
+  genero VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS albuns (
+  IDAlbum INTEGER PRIMARY KEY AUTO_INCREMENT,
+  nomeAlbum VARCHAR(100) NOT NULL,
+  anoLancamento YEAR,
+  IDArtista INTEGER,
+  CONSTRAINT fk_albums_artistas FOREIGN KEY(IDArtista) REFERENCES artistas(IDArtista)
+);
+
+CREATE TABLE IF NOT EXISTS musicas (
+  IDMusica INTEGER PRIMARY KEY AUTO_INCREMENT,
+  nomeMusica VARCHAR(100) NOT NULL,
+  duracao INTEGER,
+  IDAlbum INTEGER,
+  CONSTRAINT fk_musicas_albums FOREIGN KEY(IDAlbum) REFERENCES albuns(IDAlbum)
+);
